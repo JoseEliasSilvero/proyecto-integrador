@@ -1,3 +1,9 @@
+body{
+    background-image: url(/src/img/rym2.jpg);
+    background-position: 0% 0%;
+    background-repeat: no-repeat;
+    /* background-size: auto auto; */
+}
 .div{
     width: 18vw;
     height: 18vw;
