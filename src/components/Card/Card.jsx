@@ -1,5 +1,8 @@
-import React from "react";
- import style from './card.module.css';
+import React, { useState, useEffect } from "react";
+import {useDispatch, useSelector} from "React-redux";
+import style from './card.module.css';
+import { Link } from "react-router-dom";
+import {addFavorite, deleteFavorite} from "../../redux/actions/actions";
 
  function Card({name, gender, onClose, species, image}) {
    return (
