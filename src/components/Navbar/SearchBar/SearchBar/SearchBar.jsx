@@ -1,10 +1,17 @@
+import React,{ useState } from 'react';
 import style from './SearchBar.module.css'
 
-export default function SearchBar({onSearch}) {
+export default function SearchBar(props) {
+
+   const[id, setId] = useState("")     //inicializo como string vacio
+
+   const handleChange = (evento) =>{      //manejadores (handleChange)
+      setId(evento.target.value)
+   }
    return (
       <div className={style.div}>
-         <input className={style.input} type='search' />
-         <button className={style.btn}onClick={onSearch}>Agregar</button>
+         <input className={style.input} type='text' placeholder='Busca un personaje...' onChange={handleChange} value={id}/>
+         <button className={style.btn} onClick={() => {props.onSearch(id)}}>Agregar</button>
       </div>
    );
 }

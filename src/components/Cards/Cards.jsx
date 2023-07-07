@@ -1,16 +1,16 @@
 import Card from '../Card/Card';
-
 import style from './Cards.module.css';
 
-const Cards = (props) =>{
+export default function Cards(props){
    return(
       <div className={style.div}>
          {props.characters.map((pj) =>(
             <Card
             key={pj.id}
+            id={pj.id}
             name={pj.name}
             species={pj.species}
-            onClose={() => window.alert("funcion ventana emergente")}
+            onClose={props.onClose} 
             gender={pj.gender}
             status={pj.status}
             image={pj.image}
@@ -22,7 +22,7 @@ const Cards = (props) =>{
 };
 
 
-export default Cards;
+//export default Cards;
 //con character.map() agarro el array, dentro de map agarro a character 
 //y tengo q recorrer =>{....}
 

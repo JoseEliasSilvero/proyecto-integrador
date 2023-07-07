@@ -1,36 +1,60 @@
 import React, {useState} from 'react';
 import './App.css';
-import Card from './components/Card/Card';
 import Cards from './components/Cards/Cards.jsx';
+// import Card from './components/Card/Card';
 import Nav from './components/Navbar/SearchBar/Nav';
+import axios from "axios"
 
 
 
-function App() {
+function App(id) {
 
-   const [characters, setcharacters] = useState([]);
+   // function onSearch(dato) {
+   //    axios(`https://rickandmortyapi.com/api/character/${dato}`)
+   //    .then(({ respuesta }) => {
+   //       console.log("llegue ok", respuesta);
+   //       if (respuesta.data.name) {
+   //          setcharacters((oldChars) => [...oldChars, respuesta.data]);
+   //       } else {
+   //          window.alert('¡No hay personajes con este ID!');
+   //       }
+   //    });
+   // }
+
+   function onSearch(id) {
+      fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => {return res.json()})
+      .then((data) => {if (data.name) {
+         setcharacters((oldChars) => [...oldChars, data]);
+      } else {
+         window.alert('¡No hay personajes con este ID!');
+      }});
+   }
+   
+   function onClose(id){
+      // window.alert("onClose :)"); 
+      // let arregloFiltrer = characters.filter()
+      // setcharacters(arregloFiltrer)
+      characters.filter((pj)=> {
+         return pj.id !==id;
+      })
+   }
+
+  
+   const [characters, setcharacters] = useState([]);  //el useState solo se usa para crear el estado 
 
    return (
      <div>    
           <div>
-            <Nav />
-            <Cards characters={characters}/>
+            <Nav onSearch={onSearch}/>
+            <Cards characters={characters} onClose={onClose}/>
           </div>
     </div>
    );
    
 }
-export default App;
-//style={{padding: '25px'}}
+export default App;   
 
-{/* <div>
-     <Card
-     name={Rick.name}
-     species={Rick.species}
-     gender={Rick.gender}
-     image={Rick.image}
-     onClose={()=>window.alert('Emulamos que se cierra la card')}
-     />
-   </div> */}
-
-   
+ // function onSearch(dato){    //modif el estado de character
+   //    setcharacters([...characters, {}])      //aca recibe el nuevo estado, ... nos quedamos con todo lo q tenia characters
+   // }
